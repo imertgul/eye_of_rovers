@@ -54,8 +54,8 @@ class ImageCard extends StatelessWidget {
           context: context,
           builder: (BuildContext context) => CupertinoAlertDialog(
             title: Text(photo.cameraName + ' ' + photo.earthDate.toString()),
+            content: Image.network(photo.imageUrl),
             actions: <Widget>[
-              Image.network(photo.imageUrl),
               CupertinoDialogAction(
                 child: const Text('Close'),
                 onPressed: () {
