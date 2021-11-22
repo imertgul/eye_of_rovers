@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'image.dart';
+part of 'photo.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Image _$ImageFromJson(Map<String, dynamic> json) => Image(
+Photo _$PhotoFromJson(Map<String, dynamic> json) => Photo(
       json['id'] as int,
       json['sol'] as int,
       json['earth_date'] as String,
@@ -15,7 +15,7 @@ Image _$ImageFromJson(Map<String, dynamic> json) => Image(
       json['rover']['name'] as String,
     );//I editted my self to make it faster for child fields
 
-Map<String, dynamic> _$ImageToJson(Image instance) => <String, dynamic>{
+Map<String, dynamic> _$PhotoToJson(Photo instance) => <String, dynamic>{
       'id': instance.id,
       'sol': instance.sol,
       'earthDate': instance.earthDate,

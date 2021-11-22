@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'image.g.dart';
+part 'photo.g.dart';
 
 @JsonSerializable()
-class Image {
+class Photo {
   final int id;
   final int sol;
   @JsonKey(name: 'earth_date')
@@ -13,10 +13,10 @@ class Image {
   @JsonKey(name: 'img_src')
   final String imageUrl;
 
-  Image(this.id, this.sol, this.earthDate, this.cameraName, this.imageUrl, this.roverName);
+  Photo(this.id, this.sol, this.earthDate, this.cameraName, this.imageUrl, this.roverName);
   
-  factory Image.fromJson(Map<String, dynamic> json) =>
-      _$ImageFromJson(json);
+  factory Photo.fromJson(Map<String, dynamic> json) =>
+      _$PhotoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ImageToJson(this);
+  Map<String, dynamic> toJson() => _$PhotoToJson(this);
 }
