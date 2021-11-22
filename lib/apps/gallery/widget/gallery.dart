@@ -52,7 +52,7 @@ class _GalleryState extends State<Gallery> {
                     2000,
                     (int index) {
                       return Center(
-                        child: Text('$index'),
+                        child: Text('$index sol'),
                       );
                     },
                   ),
