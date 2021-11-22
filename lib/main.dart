@@ -1,5 +1,6 @@
 import 'package:eye_of_rovers/models/rover.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'apps/gallery/gallery_page.dart';
 
@@ -12,12 +13,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  CupertinoApp(
+    return CupertinoApp(
       title: 'Eye of rover',
       theme: const CupertinoThemeData(
         brightness: Brightness.light,
         primaryColor: CupertinoColors.systemBlue,
       ),
+      localizationsDelegates: const [
+        DefaultMaterialLocalizations.delegate,
+        DefaultCupertinoLocalizations.delegate,
+        DefaultWidgetsLocalizations.delegate,
+      ],
       home: GalleryPage(
         rovers: [
           Curiosity(),

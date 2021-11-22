@@ -9,9 +9,9 @@ import 'package:http/http.dart' as http;
 class NasaHelper {
 
 
-  static Future<PhotosResponse> imagesBySol({required Rover rover,required int sol}) async {
+  static Future<PhotosResponse> imagesBySol({required Rover rover,required int sol, required String camera}) async {
     var response = await http.get(Uri.parse(
-        'https://api.nasa.gov/mars-photos/api/v1/rovers/${rover.name}/photos?sol=$sol&page=1&api_key=$apikey'));
+        'https://api.nasa.gov/mars-photos/api/v1/rovers/${rover.name}/photos?sol=$sol&camera=$camera&api_key=$apikey'));
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
       List<dynamic> images = data['photos']; 
@@ -22,7 +22,7 @@ class NasaHelper {
 }
 
 class PhotosResponse {
-  final Iterable<Photo> images;
+  final Iterable<Photo> photos;
 
-  PhotosResponse(this.images);
+  PhotosResponse(this.photos);
 }
