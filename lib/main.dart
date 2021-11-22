@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'apps/eye_of_rovers/home.dart';
+import 'apps/gallery/home.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: GalleryPage(),
     );
   }
 }
