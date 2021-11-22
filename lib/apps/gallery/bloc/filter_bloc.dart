@@ -15,7 +15,9 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
         try {
           emit(ResponseLoading());
           var res = await NasaHelper.imagesBySol(
-              rover: rover, sol: event.sol, camera: event.cameraName);
+              rover: rover,
+              sol: event.sol,
+              camera: event.camera.toString().split('.').last);
           emit(FilterResult(res.photos));
         } on Exception catch (e) {
           emit(FilterError(e.toString()));

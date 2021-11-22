@@ -4,8 +4,8 @@ part of 'filter_bloc.dart';
 abstract class FilterEvent {}
 
 class AddFilter extends FilterEvent{
-  final String cameraName;
+  final Camera camera;
   final int sol;
 
-  AddFilter(this.cameraName, this.sol);
+  AddFilter(this.camera, this.sol);
 }
