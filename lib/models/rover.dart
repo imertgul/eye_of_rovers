@@ -12,5 +12,5 @@ class Spirit extends Rover{
 }
 class Opportunity extends Rover{
   @override
-  String get name => 'opportunity';
+  String get name => 'Opportunity';
 }
