@@ -8,9 +8,8 @@ class GalleryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return Scaffold(
-      appBar: AppBar(),
-      body: FutureBuilder<ImagesResponse>(
+    return CupertinoPageScaffold(
+      child: FutureBuilder<ImagesResponse>(
         future: NasaHelper.imagesBySol(rover: Rover.curiosity, sol: 1000),
         builder: (context, snap) {
           if (snap.hasData && snap.data != null) {
@@ -18,7 +17,7 @@ class GalleryPage extends StatelessWidget {
           }else if (snap.hasError) {
             return Center(child: Text(snap.error.toString()));
           }
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CupertinoActivityIndicator());
         },
       ),
     );
