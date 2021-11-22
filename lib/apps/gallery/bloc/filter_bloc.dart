@@ -9,12 +9,19 @@ part 'filter_state.dart';
 
 class FilterBloc extends Bloc<FilterEvent, FilterState> {
   final Rover rover;
-  FilterBloc({required this.rover}) : super(FilterInitial()) {
-    on<FilterEvent>((event, emit) {
+  FilterBloc({required this.rover}) : super(ResponseLoading()) {
+    on<FilterEvent>((event, emit) async {
       if (event is AddFilter) {
-        NasaHelper.imagesBySol(
-            rover: rover, sol: event.sol, camera: event.cameraName);
+        try {
+          emit(ResponseLoading());
+          var res = await NasaHelper.imagesBySol(
+              rover: rover, sol: event.sol, camera: event.cameraName);
+          emit(FilterResult(res.photos));
+        } on Exception catch (e) {
+          emit(FilterError(e.toString()));
+        }
       }
+      // emit(FilterError('No state'));
     });
   }
 }
