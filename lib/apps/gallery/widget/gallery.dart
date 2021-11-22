@@ -10,24 +10,30 @@ class Gallery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<PhotosResponse>(
-      future: NasaHelper.imagesBySol(rover: rover, sol: 1),
-      builder: (context, snap) {
-        if (snap.hasData && snap.data != null) {
-          return GridView.count(
-            crossAxisCount: 2,
-            children: snap.data!.images
-                .map((e) => ImageCard(
-                      photo: e,
-                      key: Key(e.id.toString()),
-                    ))
-                .toList(),
-          );
-        } else if (snap.hasError) {
-          return Center(child: Text(snap.error.toString()));
-        }
-        return const Center(child: CupertinoActivityIndicator());
-      },
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(rover.name),
+      ),
+      child: FutureBuilder<PhotosResponse>(
+        future: NasaHelper.imagesBySol(rover: rover, sol: 1),
+        builder: (context, snap) {
+          if (snap.hasData && snap.data != null) {
+            return GridView.count(
+              crossAxisCount: 2,
+              childAspectRatio: 0.8,
+              children: snap.data!.images
+                  .map((e) => ImageCard(
+                        photo: e,
+                        key: Key(e.id.toString()),
+                      ))
+                  .toList(),
+            );
+          } else if (snap.hasError) {
+            return Center(child: Text(snap.error.toString()));
+          }
+          return const Center(child: CupertinoActivityIndicator());
+        },
+      ),
     );
   }
 }
@@ -43,21 +49,39 @@ class ImageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoButton(
       child: Container(
-        height: 200,
+        height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(photo.imageUrl),
+            image: Image.network(
+              photo.imageUrl,
+              errorBuilder: (BuildContext context, Object exception,
+                  StackTrace? stackTrace) {
+                return const Text('😢 Failed to load image');
+              },
+            ).image,
             fit: BoxFit.fill,
           ),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Container(
           margin: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-          child: Text(
-            photo.roverName,
-            style: const TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                photo.cameraName,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600),
+              ),
+              Text(
+                photo.sol.toString() + ' Sol',
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w600),
+              ),
+            ],
           ),
         ),
       ),
@@ -65,7 +89,7 @@ class ImageCard extends StatelessWidget {
         showCupertinoDialog(
           context: context,
           builder: (BuildContext context) => CupertinoAlertDialog(
-            title: Text(photo.cameraName+' '+photo.earthDate.toString()),
+            title: Text(photo.cameraName + ' ' + photo.earthDate.toString()),
             actions: <Widget>[
               Image.network(photo.imageUrl),
               CupertinoDialogAction(
