@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.eye_of_rovers">
+    package="com.personal.eye_of_rovers">
    <application
         android:label="eye_of_rovers"
         android:icon="@mipmap/ic_launcher">
