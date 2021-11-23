@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
                 DefaultCupertinoLocalizations.delegate,
                 DefaultWidgetsLocalizations.delegate,
               ],
+              //It is something similar to BlocBuilder
               home: StreamBuilder<AuthState>(
                   stream: AuthRepository().authStream,
                   builder: (context, snap) {

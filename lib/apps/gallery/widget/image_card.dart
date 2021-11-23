@@ -17,6 +17,7 @@ class ImageCard extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
+            //Image widget supports ghost loader etc. in material. For cupertion I cant make it work
             image: Image.network(
               photo.imageUrl,
               errorBuilder: (BuildContext context, Object exception,

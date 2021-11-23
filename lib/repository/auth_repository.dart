@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class AuthRepository {
-  //To make it singleton
+  //To make it singleton to access anywhere
   static final _instance = AuthRepository._();
   factory AuthRepository() => _instance;
 
@@ -44,6 +44,7 @@ class AuthRepository {
         final AccessToken accessToken = result.accessToken!;
         final OAuthCredential credential =
             FacebookAuthProvider.credential(accessToken.token);
+        //save auth token to see public infos of user
         await FirebaseAuth.instance.signInWithCredential(credential);
       } else {
         StateError(result.message ?? 'Unkown error');

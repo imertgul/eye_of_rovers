@@ -22,6 +22,7 @@ class _GalleryState extends State<Gallery> {
 
   @override
   void initState() {
+    //Initial filters
     selectedCamera = widget.rover.availableCameras.first;
     selectedSol = 100;
 
@@ -153,28 +154,6 @@ class _GalleryState extends State<Gallery> {
           }
         },
       ),
-      // child: FutureBuilder<PhotosResponse>(
-      //   future: NasaHelper.imagesBySol(rover: rover, sol: 1, camera: 'FHAZ'),
-      //   builder: (context, snap) {
-      //     if (snap.hasData && snap.data != null) {
-      //       return Center(
-      //         child: GridView.count(
-      //           crossAxisCount: 2,
-      //           childAspectRatio: 0.8,
-      //           children: snap.data!.photos
-      //               .map((e) => ImageCard(
-      //                     photo: e,
-      //                     key: Key(e.id.toString()),
-      //                   ))
-      //               .toList(),
-      //         ),
-      //       );
-      //     } else if (snap.hasError) {
-      //       return Center(child: Text(snap.error.toString()));
-      //     }
-      //     return const Center(child: CupertinoActivityIndicator());
-      //   },
-      // ),
     );
   }
 }
