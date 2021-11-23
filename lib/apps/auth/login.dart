@@ -1,4 +1,4 @@
-import 'package:eye_of_rovers/helpers/auth_helper.dart';
+import 'package:eye_of_rovers/repository/auth_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 class LoginPage extends StatelessWidget {

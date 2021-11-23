@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:eye_of_rovers/helpers/auth_helper.dart';
+import 'package:eye_of_rovers/repository/auth_repository.dart';
 import 'package:eye_of_rovers/models/rover.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
