@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:eye_of_rovers/helpers/auth_helper.dart';
 import 'package:eye_of_rovers/models/rover.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'apps/auth/login.dart';
 import 'apps/gallery/gallery_page.dart';
 
 void main() {
@@ -26,13 +29,14 @@ class MyApp extends StatelessWidget {
         DefaultCupertinoLocalizations.delegate,
         DefaultWidgetsLocalizations.delegate,
       ],
-      home: GalleryPage(
-        rovers: [
-          Curiosity(),
-          Spirit(),
-          Opportunity(),
-        ],
-      ),
+      home: LoginPage(),
+      // home: GalleryPage(
+      //   rovers: [
+      //     Curiosity(),
+      //     Spirit(),
+      //     Opportunity(),
+      //   ],
+      // ),
     );
   }
 }
