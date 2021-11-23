@@ -17,32 +17,39 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // AuthRepository().init();
-    return CupertinoApp(
-      title: 'Eye of rover',
-      theme: const CupertinoThemeData(
-        brightness: Brightness.light,
-        primaryColor: CupertinoColors.systemBlue,
-      ),
-      localizationsDelegates: const [
-        DefaultMaterialLocalizations.delegate,
-        DefaultCupertinoLocalizations.delegate,
-        DefaultWidgetsLocalizations.delegate,
-      ],
-      home: StreamBuilder<AuthState>(
-          stream: AuthRepository().authStream,
-          builder: (context, snap) {
-            if (snap.data is LoggedIn) {
-              return GalleryPage(
-                rovers: [
-                  Curiosity(),
-                  Spirit(),
-                  Opportunity(),
-                ],
-              );
-            } else
-              return LoginPage();
-          }),
-    );
+    return FutureBuilder(
+        future: AuthRepository().init(),
+        builder: (context, snap) {
+          if (snap.hasData && snap.data == true) {
+            return CupertinoApp(
+              title: 'Eye of rover',
+              theme: const CupertinoThemeData(
+                brightness: Brightness.light,
+                primaryColor: CupertinoColors.systemBlue,
+              ),
+              localizationsDelegates: const [
+                DefaultMaterialLocalizations.delegate,
+                DefaultCupertinoLocalizations.delegate,
+                DefaultWidgetsLocalizations.delegate,
+              ],
+              home: StreamBuilder<AuthState>(
+                  stream: AuthRepository().authStream,
+                  builder: (context, snap) {
+                    if (snap.data is LoggedIn) {
+                      return GalleryPage(
+                        rovers: [
+                          Curiosity(),
+                          Spirit(),
+                          Opportunity(),
+                        ],
+                      );
+                    } else
+                      return LoginPage();
+                  }),
+            );
+          } else if (snap.hasError) {
+            return Text(snap.error.toString());
+          } else return Center(child: CupertinoActivityIndicator());
+        });
   }
 }
