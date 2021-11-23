@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">Eye of rover</string>  
+  <string name="facebook_app_id">221784063401235</string>
+  <string name="fb_login_protocol_scheme">fb221784063401235</string>
+</resources>
