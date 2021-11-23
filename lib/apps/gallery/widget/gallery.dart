@@ -1,4 +1,5 @@
 import 'package:eye_of_rovers/apps/gallery/bloc/filter_bloc.dart';
+import 'package:eye_of_rovers/repository/auth_repository.dart';
 import 'package:eye_of_rovers/models/rover.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,11 @@ class _GalleryState extends State<Gallery> {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text(widget.rover.name),
+        leading: CupertinoButton(
+          child: const Text("Logout"),
+          padding: const EdgeInsets.all(0),
+          onPressed: () => AuthRepository().logOutFromFacebook(),
+        ),
         trailing: CupertinoButton(
           child: const Text("Add Filter"),
           padding: const EdgeInsets.all(0),
