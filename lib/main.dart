@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthRepository().init();
+    // AuthRepository().init();
     return CupertinoApp(
       title: 'Eye of rover',
       theme: const CupertinoThemeData(
@@ -29,14 +29,20 @@ class MyApp extends StatelessWidget {
         DefaultCupertinoLocalizations.delegate,
         DefaultWidgetsLocalizations.delegate,
       ],
-      home: LoginPage(),
-      // home: GalleryPage(
-      //   rovers: [
-      //     Curiosity(),
-      //     Spirit(),
-      //     Opportunity(),
-      //   ],
-      // ),
+      home: StreamBuilder<AuthState>(
+          stream: AuthRepository().authStream,
+          builder: (context, snap) {
+            if (snap.data is LoggedIn) {
+              return GalleryPage(
+                rovers: [
+                  Curiosity(),
+                  Spirit(),
+                  Opportunity(),
+                ],
+              );
+            } else
+              return LoginPage();
+          }),
     );
   }
 }
